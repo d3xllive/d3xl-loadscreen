@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>D3XL SCRIPTS • Loading Screen V4</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Fullscreen Video / Dynamic Background -->
+    <video class="bg-video" autoplay loop muted playsinline poster="https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=1920">
+        <source src="https://assets.mixkit.co/videos/preview/mixkit-city-traffic-at-night-42636-large.mp4" type="video/mp4">
+    </video>
+    <div class="cinematic-bg" style="display:none;"></div>
+    <iframe id="ytBgPlayer" class="yt-bg-iframe" style="display:none;" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    <div class="yt-bg-blocker" id="ytBgBlocker" style="display:none;"></div>
+    <div class="video-overlay"></div>
+
+    <!-- Top Center User Welcome Card -->
+    <div class="top-user-pill">
+        <div class="user-avatar-badge">AD</div>
+        <div class="user-info">
+            <span class="sub">Welcome To Server</span>
+            <strong id="usernameDisplay">Oyuncu</strong>
+        </div>
+        <i class="fa-solid fa-user user-icon"></i>
+    </div>
+
+    <!-- Modal Viewport Overlay -->
+    <div class="modal-viewport">
+
+        <!-- Modal 1: Full Keyboard Keybinds -->
+        <div class="modal-card modal-wide" id="modalKeybinds">
+            <div class="modal-header">
+                <h3><i class="fa-solid fa-keyboard text-accent"></i> Sunucu Tuş Kombinasyonları</h3>
+                <div class="header-badge">İnteraktif Klavye</div>
+                <button class="modal-close-btn"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="modal-body">
+                <div class="full-keyboard">
+                    <div class="kb-row">
+                        <div class="key-cap key-sm">ESC</div>
+                        <div class="key-cap key-active" data-key="F1" data-desc="Telefonu Açar">F1</div>
+                        <div class="key-cap key-active" data-key="F2" data-desc="Envanteri Açar">F2</div>
+                        <div class="key-cap key-active" data-key="F3" data-desc="Animasyon Menüsü">F3</div>
+                        <div class="key-cap">F4</div>
+                        <div class="key-cap key-active" data-key="F5" data-desc="Meslek Menüsü">F5</div>
+                        <div class="key-cap">F6</div>
+                        <div class="key-cap">F7</div>
+                        <div class="key-cap">F8</div>
+                        <div class="key-cap">F9</div>
+                        <div class="key-cap">F10</div>
+                        <div class="key-cap">F11</div>
+                        <div class="key-cap">F12</div>
+                    </div>
+                    <div class="kb-row">
+                        <div class="key-cap">~</div>
+                        <div class="key-cap">1</div>
+                        <div class="key-cap">2</div>
+                        <div class="key-cap">3</div>
+                        <div class="key-cap">4</div>
+                        <div class="key-cap">5</div>
+                        <div class="key-cap">6</div>
+                        <div class="key-cap">7</div>
+                        <div class="key-cap">8</div>
+                        <div class="key-cap">9</div>
+                        <div class="key-cap">0</div>
+                        <div class="key-cap">-</div>
+                        <div class="key-cap key-wide">BACKSPACE</div>
+                    </div>
+                    <div class="kb-row">
+                        <div class="key-cap key-active key-tab" data-key="TAB" data-desc="Scoreboard / Tab Menü">TAB</div>
+                        <div class="key-cap key-active" data-key="Q" data-desc="Özel Yetenek / Silah Bırak">Q</div>
+                        <div class="key-cap key-active key-highlight" data-key="W" data-desc="İleri Yürü / Gaz Ver">W</div>
+                        <div class="key-cap key-active key-highlight" data-key="E" data-desc="Etkileşime Gir / Kapı Aç">E</div>
+                        <div class="key-cap key-active" data-key="R" data-desc="Şarjör Değiştir">R</div>
+                        <div class="key-cap">T</div>
+                        <div class="key-cap">Y</div>
+                        <div class="key-cap">U</div>
+                        <div class="key-cap">I</div>
+                        <div class="key-cap">O</div>
+                        <div class="key-cap">P</div>
+                    </div>
+                    <div class="kb-row">
+                        <div class="key-cap key-caps">CAPS</div>
+                        <div class="key-cap key-active key-highlight" data-key="A" data-desc="Sola Dön / Sola Yürü">A</div>
+                        <div class="key-cap key-active key-highlight" data-key="S" data-desc="Geri Yürü / Fren">S</div>
+                        <div class="key-cap key-active key-highlight" data-key="D" data-desc="Sağa Dön / Sağa Yürü">D</div>
+                        <div class="key-cap key-active key-highlight" data-key="F" data-desc="Araca Bin / İn">F</div>
+                        <div class="key-cap key-active" data-key="G" data-desc="Emniyet Kemeri Tak / Çıkar">G</div>
+                        <div class="key-cap">H</div>
+                        <div class="key-cap">J</div>
+                        <div class="key-cap key-active" data-key="K" data-desc="Üst Arama / Kişi Ara">K</div>
+                        <div class="key-cap key-active" data-key="L" data-desc="Araç Kilit / Kilit Aç">L</div>
+                        <div class="key-cap key-wide">ENTER</div>
+                    </div>
+                    <div class="kb-row">
+                        <div class="key-cap key-active key-shift" data-key="SHIFT" data-desc="Koşma / Sprint">SHIFT</div>
+                        <div class="key-cap key-active" data-key="Z" data-desc="Ses Mesafesi Değiştir">Z</div>
+                        <div class="key-cap">X</div>
+                        <div class="key-cap">C</div>
+                        <div class="key-cap">V</div>
+                        <div class="key-cap key-active" data-key="B" data-desc="Parmakla Göster / İşaret">B</div>
+                        <div class="key-cap key-active" data-key="N" data-desc="Radyo Aktif / Deaktif">N</div>
+                        <div class="key-cap key-active" data-key="M" data-desc="Harita Aç / Kapat">M</div>
+                        <div class="key-cap">/</div>
+                        <div class="key-cap key-active key-shift" data-key="SHIFT" data-desc="Koşma / Sprint">SHIFT</div>
+                    </div>
+                    <div class="kb-row">
+                        <div class="key-cap key-sm">L CTRL</div>
+                        <div class="key-cap key-sm">WIN</div>
+                        <div class="key-cap key-sm">L ALT</div>
+                        <div class="key-cap key-active key-space" data-key="SPACE" data-desc="Zıpla / El Freni">SPACE</div>
+                        <div class="key-cap key-sm">R ALT</div>
+                        <div class="key-cap key-sm">WIN</div>
+                        <div class="key-cap key-sm">R CTRL</div>
+                    </div>
+                </div>
+                <div class="key-desc-panel" id="keyDescText">
+                    <div class="key-desc-badge">SPACE</div>
+                    <div class="key-desc-info">
+                        <strong class="text-accent">Jump</strong>
+                        <span>Zıplamak veya araçta el frenini çekmek için kullanılır.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal 2: Server Rules -->
+        <div class="modal-card" id="modalRules">
+            <div class="modal-header">
+                <h3><i class="fa-solid fa-book text-accent"></i> Sunucu Kuralları</h3>
+                <button class="modal-close-btn"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="modal-body">
+                <ul class="rules-mini-list"></ul>
+            </div>
+        </div>
+
+        <!-- Modal 3: Staff Team -->
+        <div class="modal-card" id="modalStaff">
+            <div class="modal-header">
+                <h3><i class="fa-solid fa-crown text-accent"></i> Yönetim & Kadro</h3>
+                <button class="modal-close-btn"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="modal-body">
+                <div class="staff-mini-list"></div>
+            </div>
+        </div>
+
+        <!-- Modal 4: Patch Notes & Updates (Image Card Style) -->
+        <div class="modal-card modal-wide" id="modalUpdates">
+            <div class="modal-header">
+                <h3><i class="fa-solid fa-newspaper text-accent"></i> Güncelleme Notları</h3>
+                <button class="modal-close-btn"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="modal-body">
+                <div class="update-cards" id="updateCards"></div>
+            </div>
+        </div>
+
+        <!-- Modal 5: Gallery Showcase -->
+        <div class="modal-card" id="modalGallery">
+            <div class="modal-header">
+                <h3><i class="fa-solid fa-images text-accent"></i> Sunucu Galeri</h3>
+                <button class="modal-close-btn"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="modal-body">
+                <div class="gallery-grid"></div>
+            </div>
+        </div>
+
+        <!-- Modal 6: Live Settings -->
+        <div class="modal-card" id="modalSettings">
+            <div class="modal-header">
+                <h3><i class="fa-solid fa-gear text-accent"></i> Canlı Ekran & Ses Ayarları</h3>
+                <button class="modal-close-btn"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="modal-body">
+                <div class="settings-grid">
+                    <div class="setting-item">
+                        <label><i class="fa-solid fa-film text-accent"></i> Arka Plan Modu</label>
+                        <select id="settingsBgModeSelect" class="styled-select">
+                            <option value="video" selected>🎥 Hareketli Video Modu</option>
+                            <option value="youtube">📺 YouTube Video Modu</option>
+                            <option value="photo">🖼️ Fotoğraf Slayt Modu</option>
+                        </select>
+                    </div>
+                    <div class="setting-item">
+                        <label><i class="fa-solid fa-volume-high text-accent"></i> Müzik Ses Seviyesi</label>
+                        <input type="range" id="settingsVolSlider" min="0" max="100" value="40">
+                    </div>
+                    <div class="setting-item setting-row">
+                        <label><i class="fa-solid fa-hand-pointer text-accent"></i> Tıklama Ses Efektleri</label>
+                        <label class="switch">
+                            <input type="checkbox" id="settingsSoundToggle" checked>
+                            <span class="slider-switch"></span>
+                        </label>
+                    </div>
+                    <div class="setting-item">
+                        <label><i class="fa-solid fa-eye text-accent"></i> Arka Plan Bulanıklığı</label>
+                        <input type="range" id="settingsBlurSlider" min="0" max="15" value="0">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Bottom Floating Bar -->
+    <div class="bottom-bar-wrapper">
+
+        <!-- Music Player Widget -->
+        <div class="glass-widget music-widget">
+            <div class="track-cover">
+                <img src="https://images.unsplash.com/photo-1614613535308-eb5fbd3d2c17?q=80&w=100&auto=format&fit=crop" alt="Cover">
+            </div>
+            <div class="track-details">
+                <strong id="songTitle">Kanye West</strong>
+                <span id="artistTitle">Flashing Lights</span>
+                <div class="track-timeline">
+                    <span id="timeCurrent">00:00</span>
+                    <div class="timeline-bar" id="timelineBar" style="cursor:pointer;">
+                        <div class="timeline-fill" id="timelineFill" style="width:0%;"></div>
+                    </div>
+                    <span id="timeTotal">00:00</span>
+                </div>
+            </div>
+            <div class="music-controls">
+                <button class="m-btn" id="repeatBtn"><i class="fa-solid fa-rotate-left"></i></button>
+                <button class="m-btn" id="prevBtn"><i class="fa-solid fa-backward-step"></i></button>
+                <button class="m-btn m-btn-play" id="playBtn"><i class="fa-solid fa-play"></i></button>
+                <button class="m-btn" id="nextBtn"><i class="fa-solid fa-forward-step"></i></button>
+                <button class="m-btn" id="shuffleBtn"><i class="fa-solid fa-shuffle"></i></button>
+            </div>
+        </div>
+
+        <!-- Center Navigation Icon Pills -->
+        <div class="glass-widget nav-icons-widget">
+            <button class="icon-nav-btn" data-modal="modalKeybinds" title="Tuşlar"><i class="fa-solid fa-keyboard"></i></button>
+            <button class="icon-nav-btn" data-modal="modalRules" title="Kurallar"><i class="fa-solid fa-quote-left"></i></button>
+            <button class="icon-nav-btn" data-modal="modalStaff" title="Kadro"><i class="fa-solid fa-crown"></i></button>
+            <button class="icon-nav-btn" data-modal="modalUpdates" title="Güncellemeler"><i class="fa-solid fa-newspaper"></i></button>
+            <button class="icon-nav-btn" data-modal="modalGallery" title="Galeri"><i class="fa-solid fa-images"></i></button>
+            <button class="icon-nav-btn" data-modal="modalSettings" title="Ayarlar"><i class="fa-solid fa-gear"></i></button>
+        </div>
+
+        <!-- Socials & Loading Progress Widget -->
+        <div class="glass-widget progress-socials-widget">
+            <div class="social-icons">
+                <a href="#" title="Discord"><i class="fa-brands fa-discord"></i></a>
+                <a href="#" title="X"><i class="fa-brands fa-x-twitter"></i></a>
+                <a href="#" title="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+                <a href="#" title="Twitch"><i class="fa-brands fa-twitch"></i></a>
+                <a href="#" title="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+                <a href="#" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
+            </div>
+            <div class="brand-progress-info">
+                <div class="brand-sub-text">
+                    <strong>D3XL SCRIPTS</strong>
+                    <span>Best Roleplay Experience</span>
+                </div>
+                <div class="loading-state">
+                    <span id="loadingPercentText">Loading game (0%)</span>
+                    <div class="spinner-ring"></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="config.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
