@@ -1,5 +1,7 @@
 # Table of contents
 
+* [🏠 Overview](README.md)
+
 ## 📺 D3XL Loading Screen V4
 
 * [🚀 Getting Started](docs/getting-started.md)
